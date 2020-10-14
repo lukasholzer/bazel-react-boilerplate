@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './app.css';
+import './App.css';
 
 export const App = () => {
   return <div class="app">hello world</div>;

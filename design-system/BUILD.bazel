@@ -1,0 +1,48 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("//tools/bazel_rules:index.bzl", "jest_test")
+
+package(default_visibility = ["//design-system:__subpackages__"])
+
+ts_project(
+    name = "design-system",
+    srcs = glob(
+        include = ["**/*.tsx"],
+        exclude = ["**/*.test.tsx"],
+    ),
+    source_map = True,
+    tsconfig = ":tsconfig_app",
+    deps = [
+        "@npm//@types/node",
+        "@npm//react",
+        "@npm//react-dom",
+    ],
+)
+
+jest_test(
+    name = "test",
+    srcs = glob(["**/*.test.tsx"]),
+    tsconfig = ":tsconfig_test",
+    deps = [
+        ":design-system",
+        "@npm//@testing-library/react",
+        "@npm//react",
+    ],
+)
+
+ts_config(
+    name = "tsconfig_app",
+    src = ":tsconfig.app.json",
+    deps = [
+        ":tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)
+
+ts_config(
+    name = "tsconfig_test",
+    src = ":tsconfig.test.json",
+    deps = [
+        ":tsconfig.json",
+        "//:tsconfig.base.json",
+    ],
+)
