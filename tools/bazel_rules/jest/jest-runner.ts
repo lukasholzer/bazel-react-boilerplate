@@ -1,16 +1,18 @@
-// import { argv } from 'yargs';
+import yargs = require('yargs/yargs');
 // import { resolve } from 'path';
 // import { runCLI } from 'jest';
 
 async function main() {
+  const argv = yargs(process.argv.slice(2)).options({
+    update: { type: 'boolean', default: false },
+  }).argv;
   console.log(`
   
   
   HELLO WORLD!
   
-  
-  
-  `)
+    
+  `, argv);
   // const { jestConfig, setupFile, files, suite } = argv;
   // const jestConfigPath = updateJestConfig(suite, jestConfig);
 

@@ -1,26 +1,8 @@
-load("@npm//@bazel/typescript:index.bzl", "ts_project", "ts_library")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
 package(default_visibility = ["//:__subpackages__"])
 
 ts_project(
-    name = "jest",
-    srcs = glob(["**/*.ts"]),
-    source_map = True,
-    tsconfig = {
-        "compilerOptions": {
-            "module": "commonjs",
-            "target": "esnext",
-            "types": ["node"],
-        },
-    },
-    deps = [
-        "@npm//@types/node",
-        "@npm//jest",
-        "@npm//yargs",
-    ],
-)
-
-ts_library(
     name = "jest",
     srcs = glob(["**/*.ts"]),
     source_map = True,
